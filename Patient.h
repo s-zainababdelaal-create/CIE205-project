@@ -13,8 +13,9 @@ private:
 
 public:
     // Constructor
+    Patient(); // default constructor, needed for array declarations
     Patient(int id, int checkInTime, int branch, int numTests, PatientType type);
-
+   
     // Getters
     int getId() const;
     int getCheckInTime() const;

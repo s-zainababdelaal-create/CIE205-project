@@ -1,5 +1,9 @@
 #include "Patient.h"
 
+Patient::Patient()
+    : id(0), checkInTime(0), branch(0), numTests(0), type(REGULAR) {
+}
+
 Patient::Patient(int id, int checkInTime, int branch, int numTests, PatientType type)
     : id(id), checkInTime(checkInTime), branch(branch), numTests(numTests), type(type) {
 }

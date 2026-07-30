@@ -18,6 +18,7 @@ private:
     int currentPatientId; // -1 if not currently serving anyone
 
 public:
+    Doctor(); // default constructor, needed for array declarations
     Doctor(int branchNumber, Specialization spec, int shiftStartTime,
         int breakAfter, int breakDuration);
 
