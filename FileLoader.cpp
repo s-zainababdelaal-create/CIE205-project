@@ -71,8 +71,21 @@ int main() {
             file >> typeChar >> ts >> id >> br >> tests;
 
             PatientType type = (typeChar == 'E') ? EMERGENCY : REGULAR;
+<<<<<<< Updated upstream
             checkedInPatients[numCheckIns] = Patient(id, ts, br, tests, type);
             numCheckIns++;
+=======
+            Patient* p = new Patient(id, ts, br, tests, type);
+
+            if (type == EMERGENCY) {
+                // يتحط في Queue بتاعة حنين (لو جاهزة)
+            }
+            else {
+                int priority = ts + ALPHA * tests;  // priority = CT + α × TESTS
+                regularPatients.enqueue(p, priority);
+            }
+
+>>>>>>> Stashed changes
 
             cout << "Check-in: id=" << id << " type=" << typeChar
                 << " ts=" << ts << " branch=" << br << " tests=" << tests << endl;
