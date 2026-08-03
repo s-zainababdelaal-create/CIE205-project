@@ -1,5 +1,4 @@
-#ifndef UTILITIES_H
-#define UTILITIES_H
+#pragma once
 
 class Utilities {
 private:
@@ -20,4 +19,3 @@ public:
     int getAutoEscalateLimit() const;
 };
 
-#endif
