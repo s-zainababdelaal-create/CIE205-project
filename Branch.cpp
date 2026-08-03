@@ -1,7 +1,7 @@
 #include "Branch.h"
 
-Branch::Branch(int branchNumber, int numDoctors)
-    : branchNumber(branchNumber), numDoctors(numDoctors) {
+Branch::Branch(int branchNumber)
+    : branchNumber(branchNumber) {
 }
 
 int Branch::getBranchNumber() const {
@@ -9,5 +9,9 @@ int Branch::getBranchNumber() const {
 }
 
 int Branch::getNumDoctors() const {
-    return numDoctors;
+    return doctors.getSize();
+}
+
+LinkedList<Doctor>& Branch::getDoctors() {
+    return doctors;
 }
