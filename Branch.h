@@ -1,5 +1,4 @@
-#ifndef BRANCH_H
-#define BRANCH_H
+#pragma once
 
 class Branch {
 private:
@@ -13,4 +12,3 @@ public:
     int getNumDoctors() const;
 };
 
-#endif
