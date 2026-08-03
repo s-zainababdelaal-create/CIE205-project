@@ -1,5 +1,4 @@
-#ifndef DOCTOR_H
-#define DOCTOR_H
+#pragma once
 
 enum Specialization { SENIOR, JUNIOR };
 
@@ -29,4 +28,3 @@ public:
     int getBreakDuration() const;
 };
 
-#endif
