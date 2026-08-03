@@ -1,14 +1,19 @@
 #pragma once
+#include "Doctor.h"
+#include "LinkedList.h"
 
 class Branch {
 private:
     int branchNumber;
-    int numDoctors;
+    LinkedList<Doctor> doctors;
 
 public:
-    Branch(int branchNumber, int numDoctors);
+    Branch(int branchNumber);
+
+    Branch(const Branch&) = delete;
+    Branch& operator=(const Branch&) = delete;
 
     int getBranchNumber() const;
     int getNumDoctors() const;
+    LinkedList<Doctor>& getDoctors();
 };
-
