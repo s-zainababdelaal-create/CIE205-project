@@ -1,13 +1,12 @@
-#ifndef LINKEDLIST_H
-#define LINKEDLIST_H
+#pragma once
 
 #include <iostream>
 using namespace std;
 
 template <typename T>
 class LinkedList {
-public:
-    // Node structure inside LinkedList
+private:
+    // Node structure moved to private for better encapsulation
     struct Node {
         T data;
         Node* next;
@@ -15,14 +14,13 @@ public:
         Node(const T& value) : data(value), next(nullptr), prev(nullptr) {}
     };
 
-private:
     Node* head;   // points to the first element
     Node* tail;   // points to the last element
     int   count;  // how many elements are currently stored
 
 public:
-    LinkedList();                                                 // constructor
-    ~LinkedList();                                                // destructor
+    LinkedList();                                                  // constructor
+    ~LinkedList();                                                 // destructor
 
     LinkedList(const LinkedList<T>& other) = delete;              // disable copy constructor
     LinkedList<T>& operator=(const LinkedList<T>& other) = delete; // disable assignment operator
@@ -160,12 +158,7 @@ bool LinkedList<T>::removeByVal(const T& value) {
 // isEmpty
 template <typename T>
 bool LinkedList<T>::isEmpty() const {
-    if (count == 0) {
-        return true;
-    }
-    else {
-        return false;
-    }
+    return count == 0;
 }
 
 // getSize
@@ -200,5 +193,3 @@ template <typename T>
 typename LinkedList<T>::Node* LinkedList<T>::getTail() const {
     return tail;
 }
-
-#endif
