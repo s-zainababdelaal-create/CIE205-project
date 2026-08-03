@@ -1,7 +1,8 @@
 #pragma once
 #include <iostream>
-#include <stdexcept>   // needed for runtime_error, used in dequeue()/front()
+#include <stdexcept>   // needed for throwing runtime_error
 using namespace std;
+
 template <typename T>
 class Queue {
 private:
@@ -16,8 +17,10 @@ private:
 public:
     Queue();                       // constructor
     ~Queue();                      // destructor
-    Queue(const Queue<T>& other) = delete;              // copying would duplicate patient pointers -> two queues owning the same patient
-    Queue<T>& operator=(const Queue<T>& other) = delete; // same reason, for assignment
+
+    Queue(const Queue<T>& other) = delete;              // To disable copying of patienting and duplicating patient pointers 
+    Queue<T>& operator=(const Queue<T>& other) = delete; 
+
     void enqueue(const T& value);   // add to the rear
     T    dequeue();                 // remove and return from the front
     T& front() const;             // look at the front without removing it
@@ -25,6 +28,7 @@ public:
     int  getSize() const;
     T removeByID(int id);          // find by ID anywhere in queue, unlink, return it
 };
+
 //Constructor
 template <typename T>
 Queue<T>::Queue() : frontPtr(nullptr), rearPtr(nullptr), count(0) {}
@@ -35,6 +39,7 @@ Queue<T>::~Queue() {
         dequeue();
     }
 }
+
 //enqueue 
 // O(1): always attaches at rearPtr, no traversal needed.
 template <typename T>
@@ -51,6 +56,7 @@ void Queue<T>::enqueue(const T& value) {
     }
     count++;
 }
+
 //dequeue
 // O(1): always detaches frontPtr, no traversal needed.
 template <typename T>
@@ -68,6 +74,7 @@ T Queue<T>::dequeue() {
     count--;
     return value;
 }
+
 //front
 // O(1): just reads, does not remove.
 template <typename T>
@@ -77,6 +84,7 @@ T& Queue<T>::front() const {
     }
     return frontPtr->data;
 }
+
 //isEmpty
 template <typename T>
 bool Queue<T>::isEmpty() const {
@@ -87,14 +95,16 @@ bool Queue<T>::isEmpty() const {
         return false;
     }
 }
+
 //getSize
 template <typename T>
 int Queue<T>::getSize() const {
     return count;
 }
+
 //removeByID
-// O(n): walks the list for a matching ID, unlinks that node, patches rearPtr if needed.
-// Needed for L events, since a leaving patient can be anywhere in this queue, not just the front.
+// O(n): walks the list for a matching ID, unlinks that node, reconnects rearPtr if needed.
+// Needed for L events as leaving patient can be anywhere in this queue
 template <typename T>
 T Queue<T>::removeByID(int id) {
     Node* current = frontPtr;
