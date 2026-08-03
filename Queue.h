@@ -1,8 +1,7 @@
-#ifndef QUEUE_H
-#define QUEUE_H
+#pragma once
 #include <iostream>
+#include <stdexcept>   // needed for runtime_error, used in dequeue()/front()
 using namespace std;
-
 template <typename T>
 class Queue {
 private:
@@ -11,29 +10,24 @@ private:
         Node* next;
         Node(const T& value) : data(value), next(nullptr) {}
     };
-
     Node* frontPtr;   //points to the oldest element
     Node* rearPtr;    //points to the newest element
     int   count;      //how many elements are currently stored
-
 public:
     Queue();                       // constructor
     ~Queue();                      // destructor
-
-    Queue(const Queue<T>& other) = delete;                        ////////////
-    Queue<T>& operator=(const Queue<T>& other) = delete;          /////////////
-
+    Queue(const Queue<T>& other) = delete;              // copying would duplicate patient pointers -> two queues owning the same patient
+    Queue<T>& operator=(const Queue<T>& other) = delete; // same reason, for assignment
     void enqueue(const T& value);   // add to the rear
     T    dequeue();                 // remove and return from the front
     T& front() const;             // look at the front without removing it
     bool isEmpty() const;
     int  getSize() const;
+    T removeByID(int id);          // find by ID anywhere in queue, unlink, return it
 };
-
 //Constructor
 template <typename T>
 Queue<T>::Queue() : frontPtr(nullptr), rearPtr(nullptr), count(0) {}
-
 //Destructor
 template <typename T>
 Queue<T>::~Queue() {
@@ -41,7 +35,6 @@ Queue<T>::~Queue() {
         dequeue();
     }
 }
-
 //enqueue 
 // O(1): always attaches at rearPtr, no traversal needed.
 template <typename T>
@@ -58,7 +51,6 @@ void Queue<T>::enqueue(const T& value) {
     }
     count++;
 }
-
 //dequeue
 // O(1): always detaches frontPtr, no traversal needed.
 template <typename T>
@@ -66,30 +58,25 @@ T Queue<T>::dequeue() {
     if (isEmpty()) {
         throw runtime_error("Queue is empty!");
     }
-
     Node* temp = frontPtr;
     T value = temp->data;
     frontPtr = frontPtr->next;
-
     if (frontPtr == nullptr) {
         rearPtr = nullptr;
     }
-
     delete temp;
     count--;
     return value;
 }
-
 //front
 // O(1): just reads, does not remove.
 template <typename T>
 T& Queue<T>::front() const {
     if (isEmpty()) {
-        cout << "Queue is empty! \n";
+        throw runtime_error("Queue is empty!");
     }
     return frontPtr->data;
 }
-
 //isEmpty
 template <typename T>
 bool Queue<T>::isEmpty() const {
@@ -100,10 +87,36 @@ bool Queue<T>::isEmpty() const {
         return false;
     }
 }
-
 //getSize
 template <typename T>
 int Queue<T>::getSize() const {
     return count;
 }
-#endif
+//removeByID
+// O(n): walks the list for a matching ID, unlinks that node, patches rearPtr if needed.
+// Needed for L events, since a leaving patient can be anywhere in this queue, not just the front.
+template <typename T>
+T Queue<T>::removeByID(int id) {
+    Node* current = frontPtr;
+    Node* prev = nullptr;
+    while (current != nullptr) {
+        if (current->data->getID() == id) {
+            if (prev == nullptr) {
+                frontPtr = current->next;
+            }
+            else {
+                prev->next = current->next;
+            }
+            if (current == rearPtr) {
+                rearPtr = prev;
+            }
+            T value = current->data;
+            delete current;
+            count--;
+            return value;
+        }
+        prev = current;
+        current = current->next;
+    }
+    return nullptr;
+}
