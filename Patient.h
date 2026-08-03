@@ -1,5 +1,4 @@
-#ifndef PATIENT_H
-#define PATIENT_H
+#pragma once
 
 enum PatientType { REGULAR, EMERGENCY };
 
@@ -29,4 +28,4 @@ public:
     // Setter 
     void setType(PatientType newType);
 };
-#endif
+
