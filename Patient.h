@@ -12,6 +12,7 @@ private:
 
 public:
     // Constructor
+    Patient();
     Patient(int id, int checkInTime, int branch, int numTests, PatientType type);
 
     // Disable copying (prevent shallow copies / accidental duplication)
