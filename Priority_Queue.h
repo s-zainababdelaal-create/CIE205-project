@@ -1,3 +1,4 @@
+#pragma once
 template <typename T>
 class PQNode  
     // PQNode<T> — Node class for Priority Queue
