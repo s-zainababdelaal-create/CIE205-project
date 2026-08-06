@@ -1,15 +1,12 @@
 #pragma once
-
 enum PatientType { REGULAR, EMERGENCY };
-
 class Patient {
 private:
-    int id;              
-    int checkInTime;     
-    int branch;         
-    int numTests;        
-    PatientType type;    
-
+    int id, checkInTime, branch, numTests;
+    PatientType type;
+    int finishTime = -1;   
+    int waitTime = -1;     
+    int visitTime = -1;    
 public:
     // Constructor
     Patient();
@@ -26,7 +23,12 @@ public:
     int getNumTests() const;
     PatientType getType() const;
 
-    // Setter 
-    void setType(PatientType newType);
-};
+    // Getters for finish stats
+    int getFinishTime() const;
+    int getWaitTime() const;
+    int getVisitTime() const;
 
+    // Setters
+    void setType(PatientType newType);
+    void setFinishStats(int ft, int wt, int vt);
+};
