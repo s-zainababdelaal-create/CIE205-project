@@ -28,6 +28,24 @@ PatientType Patient::getType() const {
     return type;
 }
 
+int Patient::getFinishTime() const {
+    return finishTime;
+}
+
+int Patient::getWaitTime() const {
+    return waitTime;
+}
+
+int Patient::getVisitTime() const {
+    return visitTime;
+}
+
 void Patient::setType(PatientType newType) {
     type = newType;
+}
+
+void Patient::setFinishStats(int ft, int wt, int vt) {
+    finishTime = ft;
+    waitTime = wt;
+    visitTime = vt;
 }
