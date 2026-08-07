@@ -1,4 +1,6 @@
 #pragma once
+#include "LinkedList.h"
+
 template <typename T>
 class PQNode  
     // PQNode<T> — Node class for Priority Queue
