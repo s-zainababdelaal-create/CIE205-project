@@ -1,14 +1,15 @@
 #pragma once
+#include <iostream>
 #include "LinkedList.h"
 
 template <typename T>
-class PQNode  
+class PQNode
     // PQNode<T> — Node class for Priority Queue
-  {
+{
 private:
     T* data;             // Pointer to stored object to avoid copying memory
     int priority;        // Computed priority (CT + alpha * TESTS)
-	PQNode<T>* next = nullptr; // Pointer to next node in list and nullptr if last node by default
+    PQNode<T>* next = nullptr; // Pointer to next node in list and nullptr if last node by default
 
 public:
     // Getters
@@ -38,27 +39,26 @@ public:
     T* removeByID(int id);      // Removes specific patient by ID (for Leave event)
 
     bool isEmpty(); // Make sure to check if queue is empty before dequeueing or removing by ID
-	int getSize();  // Returns current queue size
-    void display();            //for  print
-    
-    //Read-only: doesn't remove anything, just reports who qualifies for auto-escalation.
+    int getSize();  // Returns current queue size
+    void display();            // For print
+
+    // Read-only: doesn't remove anything, just reports who qualifies for auto-escalation.
     void collectExpiredIDs(int currentTime, int limit, LinkedList<int>& outIDs) const;
+
+    // --- Bonus 1: Snapshot Display ---
+    // Helper method to traverse nodes and print active element IDs
+    void printIDs() const {
+        PQNode<T>* current = Front;
+        while (current != nullptr) {
+            if (current->getData() != nullptr) {
+                std::cout << "[" << current->getData()->getId() << "] ";
+            }
+            current = current->getNext();
+        }
+    }
 };
 
-<<<<<<< HEAD
-#include "Priority_Queue.cpp" // Included for template compilation (checkpoint 2)
-=======
- 
-
-template <typename T>
-void PriorityQueue<T>::collectExpiredIDs(int currentTime, int limit, LinkedList<int>& outIDs) const {
-    PQNode<T>* current = Front;
-    while (current != nullptr) {
-        int waitTime = currentTime - current->getData()->getCheckInTime();
-        if (waitTime > limit) {
-            outIDs.insertEnd(current->getData()->getID());
-        }
-        current = current->getNext();
-    }
-}
->>>>>>> aa010fb48d827618711ef81e6f6df8429871934b
+// Included at the BOTTOM, after both classes are fully declared above --
+// this is required for template method bodies to compile (they reference
+// PQNode<T>/PriorityQueue<T> which must already be known types).
+#include "Priority_Queue.cpp"
