@@ -39,4 +39,4 @@ public:
     void display();            //for  print
 };
 
-//#include "Priority_Queue.cpp" // Included for template compilation (checkpoint 2)
+#include "Priority_Queue.cpp" // Included for template compilation (checkpoint 2)
