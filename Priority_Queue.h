@@ -18,6 +18,9 @@ public:
     void setNext(PQNode<T>* next);
     void setData(T* item);
     void setPriority(double p); // Note: double converted to int
+
+    //Read-only: doesn't remove anything, just reports who qualifies for auto-escalation.
+    void collectExpiredIDs(int currentTime, int limit, LinkedList<int>& outIDs) const;
 };
 
 
