@@ -10,14 +10,14 @@ void writeOutput(LinkedList<Patient*>& doneList, const string& filename) {
         return;
     }
 
-    LinkedList<Patient*>::Node* current = doneList.getHead();
+    auto current = doneList.getHead();
     while (current != nullptr) {
         Patient* p = current->data;
         outFile << p->getFinishTime() << " "
-                << p->getId() << " "
-                << p->getCheckInTime() << " "
-                << p->getWaitTime() << " "
-                << p->getVisitTime() << endl;
+            << p->getId() << " "
+            << p->getCheckInTime() << " "
+            << p->getWaitTime() << " "
+            << p->getVisitTime() << endl;
         current = current->next;
     }
 

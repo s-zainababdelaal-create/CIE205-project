@@ -5,9 +5,7 @@
 #include "Patient.h"
 #include "LinkedList.h"
 
-LinkedList<Patient*> makeDummyDoneList() {
-    LinkedList<Patient*> doneList;
-
+void makeDummyDoneList(LinkedList<Patient*>& doneList) {
     Patient* p1 = new Patient(1, 5, 1, 2, REGULAR);
     p1->setFinishStats(20, 10, 5);   // FT=20, WT=10, VT=5
     doneList.insertEnd(p1);
@@ -19,6 +17,4 @@ LinkedList<Patient*> makeDummyDoneList() {
     Patient* p3 = new Patient(3, 12, 2, 3, REGULAR);
     p3->setFinishStats(35, 15, 8);   // FT=35, WT=15, VT=8
     doneList.insertEnd(p3);
-
-    return doneList;
 }

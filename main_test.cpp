@@ -8,13 +8,14 @@
 using namespace std;
 
 // declared in dummy_done_list.cpp
-LinkedList<Patient*> makeDummyDoneList();
+void makeDummyDoneList(LinkedList<Patient*>& doneList);
 
 // declared in OutputWriter.cpp
 void writeOutput(LinkedList<Patient*>& doneList, const string& filename);
 
 int main() {
-    LinkedList<Patient*> doneList = makeDummyDoneList();
+    LinkedList<Patient*> doneList;
+    makeDummyDoneList(doneList);
 
     writeOutput(doneList, "output_test.txt");
 
