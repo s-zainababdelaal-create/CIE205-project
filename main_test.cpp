@@ -12,14 +12,10 @@ void writeOutput(LinkedList<Patient*>& doneList, const string& filename);
 // declared in Statistics.cpp
 void printStatistics(LinkedList<Patient*>& doneList);
 
+// declared in InteractiveMode.cpp
+void runInteractiveMode();
+
 int main() {
-    LinkedList<Patient*> doneList;
-    makeDummyDoneList(doneList);
-
-    writeOutput(doneList, "output_test.txt");
-    printStatistics(doneList);
-
-    cout << "Done! Check output_test.txt for the result." << endl;
-
+    runInteractiveMode();
     return 0;
 }
