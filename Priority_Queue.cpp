@@ -48,7 +48,7 @@ void PriorityQueue<T>::enqueue(T* item, int priority)
 	}
 	else {
 		PQNode<T>* current = Front;
-		while (current->getNext() != nullptr && current->getNext()->getPriority() <= priority) {
+		while (current->getNext() != nullptr && current->getNext()->getPriority() >= priority) {
 			current = current->getNext();
 		}
 		newNode->setNext(current->getNext());
