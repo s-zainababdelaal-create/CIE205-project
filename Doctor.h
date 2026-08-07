@@ -1,4 +1,6 @@
-#pragma once
+
+   #pragma once
+#include <string>
 
 enum Specialization { SENIOR, JUNIOR };
 
@@ -17,7 +19,7 @@ private:
     int currentPatientId;    // -1 if not currently serving anyone
 
 public:
-    Doctor(); // default constructor
+    Doctor(); // Default constructor
     Doctor(int branchNumber, Specialization spec, int shiftStartTime, int breakAfter, int breakDuration);
 
     // --- Task 2: Doctor Availability ---
@@ -37,6 +39,10 @@ public:
 
         return true;
     }
+
+    // --- Bonus 1: Status Formatting ---
+    // Generates a formatted string representing the doctor's current status
+    std::string getStatusString(int currentTime) const;
 
     // --- Setters for Task 2 & Simulation ---
     void setFreeAtTime(int finishTime) {
@@ -58,6 +64,5 @@ public:
     int getBreakAfter() const;
     int getBreakDuration() const;
     int getFreeAtTime() const { return freeAtTime; }
-    int getOnBreakUntil() const { return onBreakUntil; }
     int getCurrentPatientId() const { return currentPatientId; }
 };
