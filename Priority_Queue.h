@@ -1,5 +1,6 @@
 #pragma once
 #include "LinkedList.h"
+#include "Priority_Queue.cpp" // Included for template compilation (checkpoint 2)
 
 template <typename T>
 class PQNode  
@@ -45,20 +46,3 @@ public:
     void collectExpiredIDs(int currentTime, int limit, LinkedList<int>& outIDs) const;
 };
 
-<<<<<<< HEAD
-#include "Priority_Queue.cpp" // Included for template compilation (checkpoint 2)
-=======
- 
-
-template <typename T>
-void PriorityQueue<T>::collectExpiredIDs(int currentTime, int limit, LinkedList<int>& outIDs) const {
-    PQNode<T>* current = Front;
-    while (current != nullptr) {
-        int waitTime = currentTime - current->getData()->getCheckInTime();
-        if (waitTime > limit) {
-            outIDs.insertEnd(current->getData()->getID());
-        }
-        current = current->getNext();
-    }
-}
->>>>>>> aa010fb48d827618711ef81e6f6df8429871934b
