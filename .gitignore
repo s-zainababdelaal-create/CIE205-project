@@ -1,6 +1,8 @@
 # Prerequisites
 *.d
 .vs/
+*.obj
+*.exe
 
 # Compiled Object files
 *.slo
