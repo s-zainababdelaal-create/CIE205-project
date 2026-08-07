@@ -7,6 +7,7 @@ private:
     int finishTime = -1;   
     int waitTime = -1;     
     int visitTime = -1;    
+    bool wasEscalated = false;
 public:
     // Constructor
     Patient();
@@ -27,8 +28,10 @@ public:
     int getFinishTime() const;
     int getWaitTime() const;
     int getVisitTime() const;
+    bool getWasEscalated() const;
 
     // Setters
     void setType(PatientType newType);
     void setFinishStats(int ft, int wt, int vt);
+    void setEscalated(bool escalated);
 };

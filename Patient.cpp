@@ -49,3 +49,10 @@ void Patient::setFinishStats(int ft, int wt, int vt) {
     waitTime = wt;
     visitTime = vt;
 }
+bool Patient::getWasEscalated() const {
+    return wasEscalated;
+}
+
+void Patient::setEscalated(bool escalated) {
+    wasEscalated = escalated;
+}

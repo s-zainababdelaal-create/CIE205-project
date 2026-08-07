@@ -16,5 +16,6 @@ void makeDummyDoneList(LinkedList<Patient*>& doneList) {
 
     Patient* p3 = new Patient(3, 12, 2, 3, REGULAR);
     p3->setFinishStats(35, 15, 8);   // FT=35, WT=15, VT=8
+    p3->setEscalated(true);          // ده مريض اتحول من Regular لـ Emergency
     doneList.insertEnd(p3);
 }
