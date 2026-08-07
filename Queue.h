@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include <stdexcept>   // needed for throwing runtime_error
+#include <stdexcept>   // Needed for throwing runtime_error
 using namespace std;
 
 template <typename T>
@@ -11,28 +11,33 @@ private:
         Node* next;
         Node(const T& value) : data(value), next(nullptr) {}
     };
-    Node* frontPtr;   //points to the oldest element
-    Node* rearPtr;    //points to the newest element
-    int   count;      //how many elements are currently stored
-public:
-    Queue();                       // constructor
-    ~Queue();                      // destructor
+    Node* frontPtr;   // Points to the oldest element
+    Node* rearPtr;    // Points to the newest element
+    int   count;      // How many elements are currently stored
 
-    Queue(const Queue<T>& other) = delete;              // To disable copying of patienting and duplicating patient pointers 
+public:
+    Queue();                        // Constructor
+    ~Queue();                       // Destructor
+
+    Queue(const Queue<T>& other) = delete;              // Disable copying patient pointers 
     Queue<T>& operator=(const Queue<T>& other) = delete; 
 
-    void enqueue(const T& value);   // add to the rear
-    T    dequeue();                 // remove and return from the front
-    T& front() const;             // look at the front without removing it
+    void enqueue(const T& value);   // Add to the rear
+    T    dequeue();                 // Remove and return from the front
+    T& front() const;               // Look at the front without removing it
     bool isEmpty() const;
     int  getSize() const;
-    T removeByID(int id);          // find by ID anywhere in queue, unlink, return it
+    T removeByID(int id);          // Find by ID anywhere in queue, unlink, return it
+
+    // --- Bonus 1: Snapshot Display ---
+    void printIDs() const;          // Traverses queue and prints element IDs
 };
 
-//Constructor
+// Constructor
 template <typename T>
 Queue<T>::Queue() : frontPtr(nullptr), rearPtr(nullptr), count(0) {}
-//Destructor
+
+// Destructor
 template <typename T>
 Queue<T>::~Queue() {
     while (!isEmpty()) {
@@ -40,13 +45,13 @@ Queue<T>::~Queue() {
     }
 }
 
-//enqueue 
+// enqueue 
 // O(1): always attaches at rearPtr, no traversal needed.
 template <typename T>
 void Queue<T>::enqueue(const T& value) {
     Node* newNode = new Node(value);
     if (isEmpty()) {
-        // first element: front and rear both point to it
+        // First element: front and rear both point to it
         frontPtr = newNode;
         rearPtr = newNode;
     }
@@ -57,7 +62,7 @@ void Queue<T>::enqueue(const T& value) {
     count++;
 }
 
-//dequeue
+// dequeue
 // O(1): always detaches frontPtr, no traversal needed.
 template <typename T>
 T Queue<T>::dequeue() {
@@ -75,7 +80,7 @@ T Queue<T>::dequeue() {
     return value;
 }
 
-//front
+// front
 // O(1): just reads, does not remove.
 template <typename T>
 T& Queue<T>::front() const {
@@ -85,26 +90,20 @@ T& Queue<T>::front() const {
     return frontPtr->data;
 }
 
-//isEmpty
+// isEmpty
 template <typename T>
 bool Queue<T>::isEmpty() const {
-    if (count == 0) {
-        return true;
-    }
-    else {
-        return false;
-    }
+    return count == 0;
 }
 
-//getSize
+// getSize
 template <typename T>
 int Queue<T>::getSize() const {
     return count;
 }
 
-//removeByID
+// removeByID
 // O(n): walks the list for a matching ID, unlinks that node, reconnects rearPtr if needed.
-// Needed for L events as leaving patient can be anywhere in this queue
 template <typename T>
 T Queue<T>::removeByID(int id) {
     Node* current = frontPtr;
@@ -129,4 +128,17 @@ T Queue<T>::removeByID(int id) {
         current = current->next;
     }
     return nullptr;
+}
+
+// printIDs (Bonus 1)
+// O(n): traverses nodes to display stored element IDs
+template <typename T>
+void Queue<T>::printIDs() const {
+    Node* current = frontPtr;
+    while (current != nullptr) {
+        if (current->data != nullptr) {
+            std::cout << "[" << current->data->getID() << "] ";
+        }
+        current = current->next;
+    }
 }
