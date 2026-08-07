@@ -18,9 +18,6 @@ public:
     void setNext(PQNode<T>* next);
     void setData(T* item);
     void setPriority(double p); // Note: double converted to int
-
-    //Read-only: doesn't remove anything, just reports who qualifies for auto-escalation.
-    void collectExpiredIDs(int currentTime, int limit, LinkedList<int>& outIDs) const;
 };
 
 
@@ -41,6 +38,9 @@ public:
     bool isEmpty(); // Make sure to check if queue is empty before dequeueing or removing by ID
 	int getSize();  // Returns current queue size
     void display();            //for  print
+    
+    //Read-only: doesn't remove anything, just reports who qualifies for auto-escalation.
+    void collectExpiredIDs(int currentTime, int limit, LinkedList<int>& outIDs) const;
 };
 
 //#include "Priority_Queue.cpp" // Included for template compilation (checkpoint 2)
