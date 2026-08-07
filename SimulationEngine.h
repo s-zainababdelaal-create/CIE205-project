@@ -1,9 +1,10 @@
 #pragma once
+#include <iostream>
 #include "Utilities.h"
+#include "LinkedList.h"
 #include "Branch.h"
 #include "Event.h"
 #include "Scheduler.h"
-#include "LinkedList.h"
 
 class SimulationEngine {
 private:
@@ -12,20 +13,16 @@ private:
     LinkedList<Event*>& events;
     Scheduler* scheduler;
     int currentTime;
+    bool isInteractive; // Bonus 1: Flag for interactive step-by-step mode
+
+    // Helper method to print real-time simulation state
+    void printSnapshot(int currentTime);
 
 public:
-    SimulationEngine(Utilities* utilities, LinkedList<Branch*>& branches, LinkedList<Event*>& events, Scheduler* scheduler);
+    // Updated constructor receiving optional interactive mode flag
+    SimulationEngine(Utilities* utilities, LinkedList<Branch*>& branches, 
+                     LinkedList<Event*>& events, Scheduler* scheduler, 
+                     bool isInteractive = false);
 
-    // ---- Task 1: main loop orchestration ----
     void run();
-
-    // ---- Task 2: doctor availability ----
-    // likely lives as methods on Doctor itself (isAvailableAt, etc.) rather
-    // than here -- see notes, this class mainly calls into those
-
-    // ---- Task 7: output writer ----
-    // void writeOutputFile(const string& filename);
-
-    // ---- Task 8: statistics ----
-    // void printStatistics();
 };
