@@ -9,7 +9,7 @@
 class Scheduler {
 private:
     Queue<Patient*> emergencyQueue;        // waiting Emergency patients, FIFO
-    PriorityQueue<Patient*> regularQueue;  // waiting Regular patients, sorted by priority
+    PriorityQueue<Patient> regularQueue;  // waiting Regular patients, sorted by priority
     Utilities* utilities;                 // shared, not owned -- gives us AutoE
     double alpha;                          // priority formula weight
 
