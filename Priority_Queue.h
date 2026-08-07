@@ -1,10 +1,9 @@
 #pragma once
 #include <iostream>
 #include "LinkedList.h"
-#include "Priority_Queue.cpp" // Included for template compilation (checkpoint 2)
 
 template <typename T>
-class PQNode  
+class PQNode
     // PQNode<T> — Node class for Priority Queue
 {
 private:
@@ -42,7 +41,7 @@ public:
     bool isEmpty(); // Make sure to check if queue is empty before dequeueing or removing by ID
     int getSize();  // Returns current queue size
     void display();            // For print
-    
+
     // Read-only: doesn't remove anything, just reports who qualifies for auto-escalation.
     void collectExpiredIDs(int currentTime, int limit, LinkedList<int>& outIDs) const;
 
@@ -58,3 +57,8 @@ public:
         }
     }
 };
+
+// Included at the BOTTOM, after both classes are fully declared above --
+// this is required for template method bodies to compile (they reference
+// PQNode<T>/PriorityQueue<T> which must already be known types).
+#include "Priority_Queue.cpp"
