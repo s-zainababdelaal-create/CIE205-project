@@ -14,27 +14,30 @@ private:
         Node(const T& value) : data(value), next(nullptr), prev(nullptr) {}
     };
 
-    Node* head;   // points to the first element
-    Node* tail;   // points to the last element
-    int   count;  // how many elements are currently stored
+    Node* head;   // Points to the first element
+    Node* tail;   // Points to the last element
+    int   count;  // How many elements are currently stored
 
 public:
-    LinkedList();                                                  // constructor
-    ~LinkedList();                                                 // destructor
+    LinkedList();                                                   // Constructor
+    ~LinkedList();                                                  // Destructor
 
-    LinkedList(const LinkedList<T>& other) = delete;              // disable copy constructor
-    LinkedList<T>& operator=(const LinkedList<T>& other) = delete; // disable assignment operator
+    LinkedList(const LinkedList<T>& other) = delete;               // Disable copy constructor
+    LinkedList<T>& operator=(const LinkedList<T>& other) = delete; // Disable assignment operator
 
-    void insertBegin(const T& value); // add to the front
-    void insertEnd(const T& value);   // add to the back
-    bool removeHead(T& value);        // remove and return from front
-    bool removeNode(Node* node);      // remove a specific node directly
-    bool removeByVal(const T& value); // search and remove a specific value
+    void insertBegin(const T& value); // Add to the front
+    void insertEnd(const T& value);   // Add to the back
+    bool removeHead(T& value);        // Remove and return from front
+    bool removeNode(Node* node);      // Remove a specific node directly
+    bool removeByVal(const T& value); // Search and remove a specific value
     bool isEmpty() const;
     int  getSize() const;
-    void clear();                     // remove all nodes
-    Node* getHead() const;            // look at head pointer
-    Node* getTail() const;            // look at tail pointer
+    void clear();                     // Remove all nodes
+    Node* getHead() const;            // Look at head pointer
+    Node* getTail() const;            // Look at tail pointer
+
+    // --- Bonus 1: Snapshot Display ---
+    void printIDs() const;            // Traverses list and prints element IDs
 };
 
 // Constructor
@@ -53,7 +56,7 @@ template <typename T>
 void LinkedList<T>::insertBegin(const T& value) {
     Node* newNode = new Node(value);
     if (isEmpty()) {
-        // first element: head and tail both point to it
+        // First element: head and tail both point to it
         head = newNode;
         tail = newNode;
     }
@@ -71,7 +74,7 @@ template <typename T>
 void LinkedList<T>::insertEnd(const T& value) {
     Node* newNode = new Node(value);
     if (isEmpty()) {
-        // first element: head and tail both point to it
+        // First element: head and tail both point to it
         head = newNode;
         tail = newNode;
     }
@@ -99,7 +102,7 @@ bool LinkedList<T>::removeHead(T& value) {
         head->prev = nullptr;
     }
     else {
-        tail = nullptr; // list became empty
+        tail = nullptr; // List became empty
     }
 
     delete temp;
@@ -192,4 +195,17 @@ typename LinkedList<T>::Node* LinkedList<T>::getHead() const {
 template <typename T>
 typename LinkedList<T>::Node* LinkedList<T>::getTail() const {
     return tail;
+}
+
+// printIDs (Bonus 1)
+// O(N): traverses list to display stored element IDs
+template <typename T>
+void LinkedList<T>::printIDs() const {
+    Node* current = head;
+    while (current != nullptr) {
+        if (current->data != nullptr) {
+            std::cout << "[" << current->data->getID() << "] ";
+        }
+        current = current->next;
+    }
 }
