@@ -1,18 +1,29 @@
-#include "SimulationEngine.h"
+
+#pragma once
 #include <iostream>
-using namespace std;
+#include "Utilities.h"
+#include "LinkedList.h"
+#include "Branch.h"
+#include "Event.h"
+#include "Scheduler.h"
 
-SimulationEngine::SimulationEngine(Utilities* utilities, LinkedList<Branch*>& branches, LinkedList<Event*>& events, Scheduler* scheduler)
-    : utilities(utilities), branches(branches), events(events), scheduler(scheduler), currentTime(0) {
-}
+class SimulationEngine {
+private:
+    Utilities* utilities;
+    LinkedList<Branch*>& branches;
+    LinkedList<Event*>& events;
+    Scheduler* scheduler;
+    int currentTime;
+    bool isInteractive; // Bonus 1: Flag for interactive step-by-step mode
 
-// run: the tick-by-tick loop. TODO (task 1 owner):
-//   - advance currentTime
-//   - pull events whose timestamp == currentTime, dispatch each to the
-//     matching Scheduler method (admitCheckIn / leavePatient / escalatePatient)
-//   - call scheduler->checkAutoEscalations(currentTime) each tick
-//   - call the assignment methods on scheduler
-//   - stop once all events are processed and all patients are done
-void SimulationEngine::run() {
-    // TODO: implement the loop described above
-}
+    // Helper method to print real-time simulation state
+    void printSnapshot(int currentTime);
+
+public:
+    // Updated constructor receiving optional interactive mode flag
+    SimulationEngine(Utilities* utilities, LinkedList<Branch*>& branches, 
+                     LinkedList<Event*>& events, Scheduler* scheduler, 
+                     bool isInteractive = false);
+
+    void run();
+};
