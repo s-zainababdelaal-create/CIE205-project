@@ -42,8 +42,7 @@ public:
                 
                 // Using Task 2 availability logic
                 if (doc->isFree(currentTime)) {
-                    Patient* p = nullptr;
-                    regularQueue.dequeue(p); // Retrieve highest priority patient
+                   Patient* p = regularQueue.dequeue();
                     
                     int finishTime = currentTime + p->getVisitTime();
                     doc->setFreeAtTime(finishTime);
@@ -64,8 +63,7 @@ public:
                 Doctor* doc = docNode->data;
                 
                 if (doc->isFree(currentTime)) {
-                    Patient* p = nullptr;
-                    regularQueue.dequeue(p);
+                   Patient* p = regularQueue.dequeue();
                     
                     int finishTime = currentTime + p->getVisitTime();
                     doc->setFreeAtTime(finishTime);
