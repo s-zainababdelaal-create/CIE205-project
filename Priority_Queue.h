@@ -1,3 +1,6 @@
+#pragma once
+#include "LinkedList.h"
+
 template <typename T>
 class PQNode  
     // PQNode<T> — Node class for Priority Queue
@@ -37,6 +40,25 @@ public:
     bool isEmpty(); // Make sure to check if queue is empty before dequeueing or removing by ID
 	int getSize();  // Returns current queue size
     void display();            //for  print
+    
+    //Read-only: doesn't remove anything, just reports who qualifies for auto-escalation.
+    void collectExpiredIDs(int currentTime, int limit, LinkedList<int>& outIDs) const;
 };
 
+<<<<<<< HEAD
 #include "Priority_Queue.cpp" // Included for template compilation (checkpoint 2)
+=======
+ 
+
+template <typename T>
+void PriorityQueue<T>::collectExpiredIDs(int currentTime, int limit, LinkedList<int>& outIDs) const {
+    PQNode<T>* current = Front;
+    while (current != nullptr) {
+        int waitTime = currentTime - current->getData()->getCheckInTime();
+        if (waitTime > limit) {
+            outIDs.insertEnd(current->getData()->getID());
+        }
+        current = current->getNext();
+    }
+}
+>>>>>>> aa010fb48d827618711ef81e6f6df8429871934b
